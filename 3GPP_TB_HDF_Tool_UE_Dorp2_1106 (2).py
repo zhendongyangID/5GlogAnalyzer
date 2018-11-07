@@ -69,9 +69,7 @@ def creat_folder(path):
 
 if __name__ == "__main__":
 
-    dirs=input()   
-	print("test info")
-	print("test info 2")
+    dirs=input()                       
     for file in os.listdir(dirs):
         filename=os.path.splitext(file)
         if filename[1] == ".h5":     
@@ -84,7 +82,6 @@ if __name__ == "__main__":
                     for kpiname in f[oneTab][twoTab]:
                         if kpiname !="ssb":
                             names=['time','data']
-							
                             print("以下信息成功输出："+file+"   "+kpiname)
                             x=secondlevelKPIOutupt(oneTab,twoTab,kpiname)
                             x.to_csv(csvpath+filename[0]+"_"+oneTab +"_"+ twoTab +"_" + kpiname + ".csv",index=False)
