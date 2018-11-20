@@ -62,12 +62,12 @@ def SSBKPIOutput(oneTab,twoTab,kpiname):
         datablock_All.rename(columns={0:"Time"},inplace = True)
     return datablock_All
     
-def creat_folder(path):    
-        print(file)
-        isExists=os.path.exists(path)
-        print(isExists)
+def creat_folder(dirs,path):    
+        #print(file)
+        isExists=os.path.exists(dirs+"\\"+path)
         if not isExists:
-            os.makedirs(path) 
+            print("thatis ok")
+            os.makedirs(dirs+"\\"+path) 
         return path
             
 
@@ -77,10 +77,12 @@ if __name__ == "__main__":
     for file in os.listdir(dirs):
         filename=os.path.splitext(file)                       
         if filename[1] == ".h5":     
-            print(file)       
-            path=creat_folder(filename[0])
-            csvpath=os.getcwd() + "\\"+path +"\\"
-            f = h5py.File(file,'r')
+            #print(file)       
+            path=creat_folder(dirs,filename[0])
+            csvpath=dirs + "\\"+path +"\\"
+            h5file=dirs+"\\"+file
+            print(csvpath)
+            f = h5py.File(h5file,'r')
             for oneTab in f.keys():
                 for twoTab in f[oneTab]:
                     for kpiname in f[oneTab][twoTab]:
@@ -96,4 +98,4 @@ if __name__ == "__main__":
                                 x.to_csv(csvpath+filename[0]+"_"+oneTab +"_"+ twoTab +"_" + kpiname + ".csv",index=False)
             f.close()
     print("输出已完成！，即将关闭")
-    time.sleep(10) 
+    time.sleep(10)
